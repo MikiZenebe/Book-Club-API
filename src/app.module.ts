@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { BooksModule } from './books/books.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -14,6 +15,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       appSecret: 'YOUR_APP_SECRET',
       serviceId: 'book-club-api',
     }),
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

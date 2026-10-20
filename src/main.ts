@@ -5,6 +5,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     instrument: ObserveInstrument,
   });
-  await app.listen(process.env.PORT ?? 3000);
+
+  app.enableCors({
+    origin: 'http://localhost:5173',
+  });
+
+  app.setGlobalPrefix('api');
+
+  const port = Number(process.env.PORT) || 3000;
+
+  await app.listen(port);
+
+  console.log(`BookNest API running on http://localhost:${port}/api`);
 }
 await bootstrap();

@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import Sidebar from "@/components/layout/Sidebar";
 import { Link } from "react-router-dom";
 import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
 
 type Book = {
   id: string;
@@ -89,26 +90,7 @@ export default function HomePage() {
         className="min-w-0 px-5 md:ml-[240px] md:px-10 xl:ml-[260px] xl:px-16"
       >
         {/* Topbar */}
-        <header className="flex h-[80px] items-center justify-between gap-4 border-b border-dashed border-[#2b2420]/15">
-          <div className="flex items-center gap-3 text-[11px] text-[#6b5d52]">
-            <span className="hidden sm:inline">Tuesday morning</span>
-            <span className="hidden sm:inline text-[#d4a574]">·</span>
-            <span className="italic">47 readers browsing right now</span>
-          </div>
-
-          <button
-            className="group flex items-center gap-2 text-sm font-medium text-[#2b2420] hover:text-[#8b4513] transition-colors"
-            onClick={() => alert("Google sign-in is coming in Phase 2!")}
-          >
-            <span className="border-b border-[#2b2420] group-hover:border-[#8b4513] pb-0.5">
-              Sign in
-            </span>
-            <ArrowUpRight
-              size={16}
-              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </button>
-        </header>
+        <Header />
 
         {/* Hero */}
         <section className="relative grid gap-10 py-14 lg:grid-cols-[1.3fr_1fr] lg:gap-16 lg:py-20">

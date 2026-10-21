@@ -75,18 +75,16 @@ export default function Header() {
               body: JSON.stringify({ idToken: credential }),
             });
 
+            const data = await res.json();
+
             if (!res.ok) {
-              throw new Error("Google sign-in failed.");
+              throw new Error(data.message || "Google sign-in failed.");
             }
 
-            const result: { user: SignedInUser } = await res.json();
-
+            setUser(data.user);
+          } catch (error) {
             if (!cancelled) {
-              setUser(result.user);
-            }
-          } catch {
-            if (!cancelled) {
-              setAuthError("Sign-in failed. Please try again.");
+              setAuthError(error.message);
             }
           } finally {
             if (!cancelled) {

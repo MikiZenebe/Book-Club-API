@@ -4,18 +4,27 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { OAuth2Client } from 'google-auth-library';
+import { PrismaService } from '../prisma/prisma.service.js';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   private readonly googleClient = new OAuth2Client();
 
-  async verifyGoogleToken(idToken: string) {
-    const clientId = process.env.GOOGLE_CLIENT_ID;
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly configService: ConfigService,
+  ) {
+    this.googleClient = new OAuth2Client(
+      this.configService.get<string>('GOOGLE_CLIENT_ID'),
+    );
+  }
+
+  async signInWithGoogle(idToken: string) {
+    const clientId = this.configService.get<string>('GOOGLE_CLIENT_ID');
 
     if (!clientId) {
-      throw new InternalServerErrorException(
-        'Google authentication is not configured.',
-      );
+      throw new Error('GOOGLE_CLIENT_ID is not configured.');
     }
 
     try {
@@ -32,14 +41,45 @@ export class AuthService {
         );
       }
 
+      if (payload.email_verified !== true) {
+        throw new UnauthorizedException('Your Google email must be verified.');
+      }
+
+      // It checks whether a record exists for that Google account. If it exists, the profile is updated; otherwise, a new user is created.
+      const user = await this.prisma.user.upsert({
+        where: {
+          googleId: payload.sub,
+        },
+        update: {
+          email: payload.email,
+          name: payload.name ?? '',
+          picture: payload.picture ?? null,
+        },
+        create: {
+          email: payload.email,
+          name: payload.name ?? '',
+          picture: payload.picture ?? null,
+          googleId: payload.sub,
+        },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          picture: true,
+          createdAt: true,
+        },
+      });
+
       return {
-        googleId: payload.sub,
-        email: payload.email,
-        name: payload.name ?? '',
-        picture: payload.picture ?? null,
+        message: 'Google sign-in verified.',
+        user,
       };
     } catch (error) {
-      throw new UnauthorizedException('Invalid or expired Google ID token.');
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+
+      throw new UnauthorizedException('Unable to verify your Google sign-in.');
     }
   }
 }

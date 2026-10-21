@@ -5,6 +5,7 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { BooksModule } from './books/books.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { PrismaModule } from './prisma/prisma.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -18,6 +19,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       serviceId: 'book-club-api',
     }),
     ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
     BooksModule,
     AuthModule,
   ],

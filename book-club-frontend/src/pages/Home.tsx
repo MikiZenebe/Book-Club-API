@@ -87,7 +87,7 @@ export default function HomePage() {
 
       <main
         id="discover"
-        className="min-w-0 px-5 md:ml-[240px] md:px-10 xl:ml-[260px] xl:px-16"
+        className="min-w-0 px-5 md:ml-60 md:px-10 xl:ml-65 xl:px-16"
       >
         {/* Topbar */}
         <Header />
@@ -128,7 +128,7 @@ export default function HomePage() {
               the last page.
             </h1>
 
-            <p className="mt-8 max-w-[460px] text-base leading-relaxed text-[#6b5d52]">
+            <p className="mt-8 max-w-115 text-base leading-relaxed text-[#6b5d52]">
               No algorithms shouting at you. No bestseller lists. Just a quiet
               corner of the internet where you can wander, discover, and keep
               track of what moves you.
@@ -137,7 +137,7 @@ export default function HomePage() {
             {/* Search */}
             <form
               onSubmit={searchBooks}
-              className="mt-10 flex max-w-[540px] items-center gap-3 border-b-2 border-[#2b2420] pb-3"
+              className="mt-10 flex max-w-135 items-center gap-3 border-b-2 border-[#2b2420] pb-3"
             >
               <Search size={20} className="shrink-0 text-[#6b5d52]" />
               <Input
@@ -172,9 +172,9 @@ export default function HomePage() {
           </div>
 
           {/* Right side - editorial collage */}
-          <div className="relative hidden min-h-[500px] lg:block">
+          <div className="relative hidden min-h-125 lg:block">
             {/* Big quote card */}
-            <div className="absolute right-0 top-4 w-[280px] rotate-[2deg] bg-[#2b2420] p-7 text-[#f5f0e8] shadow-xl">
+            <div className="absolute right-0 top-4 w-70 rotate-2 bg-[#2b2420] p-7 text-[#f5f0e8] shadow-xl">
               <Quote size={24} className="text-[#d4a574]" />
               <p className="mt-4 font-serif text-lg leading-snug italic">
                 "A reader lives a thousand lives before he dies."
@@ -185,27 +185,27 @@ export default function HomePage() {
             </div>
 
             {/* Book spine stack */}
-            <div className="absolute left-2 top-32 flex -rotate-[6deg] flex-col gap-1 shadow-2xl">
-              <div className="flex h-12 w-[220px] items-center bg-[#8b4513] px-5 font-serif text-sm text-[#f5f0e8]">
+            <div className="absolute left-2 top-32 flex -rotate-6 flex-col gap-1 shadow-2xl">
+              <div className="flex h-12 w-55 items-center bg-[#8b4513] px-5 font-serif text-sm text-[#f5f0e8]">
                 The Hidden Life of Trees
               </div>
-              <div className="flex h-10 w-[220px] items-center bg-[#d4a574] px-5 font-serif text-sm text-[#2b2420]">
+              <div className="flex h-10 w-55 items-center bg-[#d4a574] px-5 font-serif text-sm text-[#2b2420]">
                 Pachinko · Min Jin Lee
               </div>
-              <div className="flex h-14 w-[220px] items-center bg-[#4a5d4a] px-5 font-serif text-base text-[#f5f0e8]">
+              <div className="flex h-14 w-55 items-center bg-[#4a5d4a] px-5 font-serif text-base text-[#f5f0e8]">
                 Braiding Sweetgrass
               </div>
-              <div className="flex h-11 w-[220px] items-center bg-[#f5f0e8] border-y-2 border-[#2b2420] px-5 font-serif text-sm text-[#2b2420]">
+              <div className="flex h-11 w-55 items-center bg-[#f5f0e8] border-y-2 border-[#2b2420] px-5 font-serif text-sm text-[#2b2420]">
                 Normal People
               </div>
-              <div className="flex h-10 w-[220px] items-center bg-[#6b5d52] px-5 font-serif text-sm text-[#f5f0e8]">
+              <div className="flex h-10 w-55 items-center bg-[#6b5d52] px-5 font-serif text-sm text-[#f5f0e8]">
                 A Little Life
               </div>
             </div>
 
             {/* Polaroid-style note */}
-            <div className="absolute bottom-8 right-6 w-[200px] -rotate-[4deg] bg-[#f5f0e8] p-3 pb-10 shadow-xl ring-1 ring-[#2b2420]/10">
-              <div className="flex h-[130px] items-center justify-center bg-[#d4a574]/30">
+            <div className="absolute bottom-8 right-6 w-50 rotate-[-4deg] bg-[#f5f0e8] p-3 pb-10 shadow-xl ring-1 ring-[#2b2420]/10">
+              <div className="flex h-32.5 items-center justify-center bg-[#d4a574]/30">
                 <Coffee
                   size={40}
                   className="text-[#8b4513]"
@@ -218,7 +218,7 @@ export default function HomePage() {
             </div>
 
             {/* Tape element */}
-            <div className="absolute left-16 top-20 h-5 w-20 rotate-[25deg] bg-[#d4a574]/40" />
+            <div className="absolute left-16 top-20 h-5 w-20 rotate-25 bg-[#d4a574]/40" />
           </div>
         </section>
 
@@ -268,7 +268,7 @@ export default function HomePage() {
           )}
 
           {loading ? (
-            <div className="flex min-h-[300px] flex-col items-center justify-center gap-4 text-[#6b5d52]">
+            <div className="flex min-h-75 flex-col items-center justify-center gap-4 text-[#6b5d52]">
               <LoaderCircle className="animate-spin text-[#8b4513]" size={32} />
               <p className="font-serif text-lg italic">
                 pulling books off the shelf...
@@ -288,7 +288,7 @@ export default function HomePage() {
                     rel="noreferrer"
                     className="block"
                   >
-                    <div className="relative aspect-[2/3] overflow-hidden bg-[#d4a574]/30 shadow-md transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-2">
+                    <div className="relative aspect-2/3 overflow-hidden bg-[#d4a574]/30 shadow-md transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-2">
                       {book.coverUrl ? (
                         <img
                           src={book.coverUrl}
@@ -308,7 +308,7 @@ export default function HomePage() {
                         </div>
                       )}
                       {/* Hover overlay */}
-                      <div className="absolute inset-0 flex items-end bg-gradient-to-t from-[#2b2420] via-[#2b2420]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <div className="absolute inset-0 flex items-end bg-linear-to-t from-[#2b2420] via-[#2b2420]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                         <div className="p-4 text-[#f5f0e8]">
                           <span className="inline-flex items-center gap-1 text-xs">
                             Open book <ArrowUpRight size={12} />

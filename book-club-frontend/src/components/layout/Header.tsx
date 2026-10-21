@@ -132,7 +132,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 flex min-h-[76px] w-full items-center justify-between gap-4 border-b border-stone-200/80 bg-[#fcfaf7]/90 px-4 backdrop-blur-xl sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-30 flex min-h-19 w-full items-center justify-between gap-4 border-b border-stone-200/80 bg-[#fcfaf7]/90 px-4 backdrop-blur-xl sm:px-6 lg:px-8">
       {/* Left: Welcome message */}
       <div className="flex items-center gap-3 text-[11px] text-[#6b5d52]">
         <span className="hidden sm:inline">Good morning</span>
@@ -155,7 +155,7 @@ export default function Header() {
 
         <div className="relative flex min-h-10 items-center justify-center">
           {user ? (
-            <div className="flex max-w-[190px] items-center gap-3 rounded-full border border-stone-200 bg-white py-1.5 pl-1.5 pr-3 shadow-sm">
+            <div className="flex max-w-47.5 items-center gap-3 rounded-full border border-stone-200 bg-white py-1.5 pl-1.5 pr-3 shadow-sm">
               {user.picture ? (
                 <img
                   src={user.picture}

@@ -69,6 +69,7 @@ export default function Header() {
           try {
             const res = await fetch(`${API_BASE_URL}/auth/google`, {
               method: "POST",
+              credentials: "include",
               headers: {
                 "Content-Type": "application/json",
               },
@@ -84,7 +85,9 @@ export default function Header() {
             setUser(data.user);
           } catch (error) {
             if (!cancelled) {
-              setAuthError(error.message);
+              setAuthError(
+                error instanceof Error ? error.message : "Google sign-in failed.",
+              );
             }
           } finally {
             if (!cancelled) {

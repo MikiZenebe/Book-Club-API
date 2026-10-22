@@ -1,14 +1,16 @@
 import { Bookmark, Compass, Library, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
-  { label: "Discover", href: "#discover", icon: Compass, note: "today" },
-  { label: "My shelf", href: "#bookshelf", icon: Library, note: "24" },
+  { label: "Discover", href: "/", icon: Compass, note: "today" },
+  { label: "My shelf", href: "/my-shelf", icon: Library, note: "24" },
   { label: "Book clubs", href: "#clubs", icon: Users, note: "3" },
   { label: "Saved", href: "#saved", icon: Bookmark, note: "12" },
 ];
 
 export default function Sidebar() {
+  const location = useLocation();
+
   return (
     <aside className="z-20 flex flex-col border-b border-[#2b2420]/15 bg-[#ebe3d5] px-5 py-5 md:fixed md:inset-y-0 md:left-0 md:w-[240px] md:border-r md:border-b-0 md:px-7 md:py-9 xl:w-[260px]">
       {/* Logo */}
@@ -31,8 +33,8 @@ export default function Sidebar() {
         aria-label="Main navigation"
         className="flex gap-2 overflow-x-auto md:grid md:gap-1"
       >
-        {navigation.map(({ label, href, icon: Icon, note }, index) => {
-          const active = index === 0;
+        {navigation.map(({ label, href, icon: Icon, note }) => {
+          const active = location.pathname === href;
           return (
             <Link
               key={label}

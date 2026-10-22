@@ -1,11 +1,8 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { OAuth2Client } from 'google-auth-library';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +11,7 @@ export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
   ) {
     this.googleClient = new OAuth2Client(
       this.configService.get<string>('GOOGLE_CLIENT_ID'),
@@ -70,9 +68,14 @@ export class AuthService {
         },
       });
 
+      const accessToken = await this.jwtService.signAsync({
+        sub: user.id,
+      });
+
       return {
         message: 'Google sign-in verified.',
         user,
+        accessToken,
       };
     } catch (error) {
       if (error instanceof UnauthorizedException) {

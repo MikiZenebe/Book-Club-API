@@ -196,7 +196,7 @@ export default function MyShelf() {
                   </span>
                 )}
                 {active && (
-                  <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#8b4513]" />
+                  <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#8b4513]" />
                 )}
               </button>
             );
@@ -220,7 +220,7 @@ export default function MyShelf() {
       )}
 
       {shelfLoading ? (
-        <div className="flex min-h-[320px] flex-col items-center justify-center gap-4">
+        <div className="flex min-h-80 flex-col items-center justify-center gap-4">
           <LoaderCircle className="animate-spin text-[#8b4513]" size={28} />
           <p className="font-serif text-base italic text-[#6b5d52]">
             dusting off the shelves...
@@ -228,7 +228,7 @@ export default function MyShelf() {
         </div>
       ) : shelfError && shelfBooks.length === 0 ? (
         <div className="mx-auto mt-12 max-w-sm text-center">
-          <div className="mx-auto mb-5 inline-block rotate-[-3deg] border-2 border-dashed border-[#8b4513]/30 p-5">
+          <div className="mx-auto mb-5 inline-block -rotate-3 border-2 border-dashed border-[#8b4513]/30 p-5">
             <BookOpen size={32} className="text-[#8b4513]" strokeWidth={1.5} />
           </div>
           <h2 className="font-serif text-2xl text-[#2b2420]">{shelfError}</h2>

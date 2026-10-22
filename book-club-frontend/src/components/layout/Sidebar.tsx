@@ -12,7 +12,7 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="z-20 flex flex-col border-b border-[#2b2420]/15 bg-[#ebe3d5] px-5 py-5 md:fixed md:inset-y-0 md:left-0 md:w-[240px] md:border-r md:border-b-0 md:px-7 md:py-9 xl:w-[260px]">
+    <aside className="z-20 flex flex-col border-b border-[#2b2420]/15 bg-[#ebe3d5] px-5 py-5 md:fixed md:inset-y-0 md:left-0 md:w-60 md:border-r md:border-b-0 md:px-7 md:py-9 xl:w-65">
       {/* Logo */}
       <Link to="/" className="group flex w-fit items-end gap-2">
         <span className="font-serif text-3xl leading-none tracking-tight text-[#2b2420]">

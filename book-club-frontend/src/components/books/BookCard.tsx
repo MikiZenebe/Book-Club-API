@@ -126,14 +126,14 @@ export default function BookCard({
       {/* Cover presentation */}
       <div className="relative aspect-2/3 w-full overflow-hidden rounded-xl bg-[#ece5d8] shadow-sm transition-all duration-300 group-hover:shadow-md">
         {/* Real book spine lighting */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-3 rounded-l-xl bg-gradient-to-r from-black/25 via-black/8 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-3 rounded-l-xl bg-linear-to-r from-black/25 via-black/8 to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 left-2.5 z-10 w-px bg-white/20" />
         <div className="pointer-events-none absolute inset-0 z-10 rounded-xl ring-1 ring-inset ring-black/8" />
 
         {/* Cover image or editorial typographic fallback */}
         {!book.coverUrl || imageError ? (
           <div
-            className={`flex h-full w-full flex-col justify-between bg-gradient-to-br ${jacketTheme.gradient} p-4 text-[#f5f0e8]`}
+            className={`flex h-full w-full flex-col justify-between bg-linear-to-br ${jacketTheme.gradient} p-4 text-[#f5f0e8]`}
           >
             <div
               className={`flex h-full w-full flex-col justify-between rounded-lg border ${jacketTheme.border} p-3`}
@@ -228,7 +228,7 @@ export default function BookCard({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Open ${book.title} on Open Library`}
-            className="absolute inset-0 z-10 flex flex-col justify-end bg-gradient-to-t from-[#2b2420]/85 via-[#2b2420]/25 to-transparent p-3 opacity-0 backdrop-blur-[1px] transition-all duration-300 group-hover:opacity-100"
+            className="absolute inset-0 z-10 flex flex-col justify-end bg-linear-to-t from-[#2b2420]/85 via-[#2b2420]/25 to-transparent p-3 opacity-0 backdrop-blur-[1px] transition-all duration-300 group-hover:opacity-100"
           >
             <div className="flex items-center justify-between text-[#f5f0e8]">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-medium text-[#2b2420] shadow-md transition-transform duration-300 group-hover:translate-y-0 translate-y-2">

@@ -72,9 +72,9 @@ export default function ShelfBookCard({
         book={item}
         isSaved
         showBookmark={false}
-        className="max-w-64"
+        className="w-full max-w-sm mx-auto"
         footerSlot={
-          <div className="space-y-3 border-t border-dashed border-[#2b2420]/10 pt-3">
+          <div className="space-y-2.5 border-t border-dashed border-[#2b2420]/10 pt-2.5">
             {/* Status */}
             <StatusToggle
               value={book.status}
@@ -82,27 +82,28 @@ export default function ShelfBookCard({
               disabled={busy}
             />
 
-            {/* Rating */}
-            <StarRating
-              value={book.rating}
-              onChange={handleRating}
-              disabled={busy}
-            />
+            {/* Rating and remove actions */}
+            <div className="flex items-center justify-between pt-0.5">
+              <StarRating
+                value={book.rating}
+                onChange={handleRating}
+                disabled={busy}
+              />
 
-            {/* Remove */}
-            <button
-              type="button"
-              disabled={busy}
-              onClick={handleRemove}
-              className="flex items-center gap-1 text-[10px] text-[#6b5d52]/60 transition-colors hover:text-[#8b4513] disabled:opacity-40"
-            >
-              {isRemoving ? (
-                <LoaderCircle size={10} className="animate-spin" />
-              ) : (
-                <X size={10} />
-              )}
-              {isRemoving ? "removing..." : "remove from shelf"}
-            </button>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={handleRemove}
+                className="flex items-center gap-1 text-[11px] text-[#6b5d52]/60 transition-colors hover:text-[#8b4513] disabled:opacity-40"
+              >
+                {isRemoving ? (
+                  <LoaderCircle size={11} className="animate-spin" />
+                ) : (
+                  <X size={11} />
+                )}
+                {isRemoving ? "removing..." : "remove"}
+              </button>
+            </div>
           </div>
         }
       />

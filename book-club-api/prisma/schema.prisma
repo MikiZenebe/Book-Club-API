@@ -13,6 +13,17 @@ enum ReadingStatus {
   FINISHED
 }
 
+enum ClubVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum ClubRole {
+  OWNER
+  MODERATOR
+  MEMBER
+}
+
 model User {
   id        String   @id @default(cuid())
   googleId  String   @unique
@@ -22,7 +33,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  bookshelf ShelfBook[]
+  shelfBooks  ShelfBook[]
+  ownedClubs  BookClub[]       @relation("ClubOwner")
+  clubMembers ClubMember[]
+  clubBooks   ClubBook[]       @relation("ClubBookAdder")
+  discussions BookDiscussion[]
 }
 
 model ShelfBook {
@@ -42,4 +57,67 @@ model ShelfBook {
 
   @@unique([userId, openLibraryId])
   @@index([userId, status])
+}
+
+model BookClub {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  visibility  ClubVisibility @default(PUBLIC)
+  ownerId     String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  owner       User             @relation("ClubOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members     ClubMember[]
+  books       ClubBook[]
+  discussions BookDiscussion[]
+
+  @@index([visibility, createdAt])
+  @@index([ownerId])
+}
+
+model ClubMember {
+  clubId   String
+  userId   String
+  role     ClubRole @default(MEMBER)
+  joinedAt DateTime @default(now())
+
+  club BookClub @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([clubId, userId])
+  @@index([userId])
+}
+
+model ClubBook {
+  id            String   @id @default(cuid())
+  clubId        String
+  addedById     String
+  openLibraryId String
+  title         String
+  authors       String[]
+  coverUrl      String?
+  createdAt     DateTime @default(now())
+
+  club    BookClub @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  addedBy User     @relation("ClubBookAdder", fields: [addedById], references: [id], onDelete: Cascade)
+
+  @@unique([clubId, openLibraryId])
+  @@index([clubId, createdAt])
+}
+
+model BookDiscussion {
+  id        String   @id @default(cuid())
+  clubId    String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  club BookClub @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([clubId, createdAt])
+  @@index([userId])
 }

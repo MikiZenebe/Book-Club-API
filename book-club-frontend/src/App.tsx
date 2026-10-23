@@ -4,6 +4,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/Home";
 import MyShelf from "./pages/MyShelf";
+import BookClubs from "./pages/BookClubs";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/my-shelf" element={<MyShelf />} />
+            <Route path="/book-clubs" element={<BookClubs />} />
           </Routes>
         </main>
         <div className="px-5 md:px-10 xl:px-16">
@@ -24,4 +26,3 @@ export default function App() {
     </div>
   );
 }
-

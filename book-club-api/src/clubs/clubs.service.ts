@@ -14,7 +14,7 @@ export class ClubsService {
 
   async createClub(
     userId: string,
-    input: { name: string; description?: string; visibility: ClubVisibility },
+    input: { name: string; description?: string; visibility?: ClubVisibility },
   ) {
     const name = input.name?.trim();
 
